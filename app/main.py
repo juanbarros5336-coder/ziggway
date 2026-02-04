@@ -1148,13 +1148,17 @@ def render_dashboard(ctx: PageContext) -> None:
                 marker=dict(line=dict(color='#050505', width=3))
             )
             
+            # Calculate delivered percentage for the center text
+            del_row = counts[counts['status'] == 'delivered']
+            del_pct = (del_row['percent'].values[0] * 100) if not del_row.empty else 0
+            
             fig.update_layout(
                 showlegend=False,
                 height=450, 
                 margin=dict(l=0,r=0,t=0,b=0), 
                 paper_bgcolor='rgba(0,0,0,0)',
                 annotations=[dict(
-                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 36px; font-weight: 700;'>{total:,}</span><br><span style='font-family: Inter; color: #666; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span>", 
+                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 36px; font-weight: 700;'>{total:,}</span><br><span style='font-family: Inter; color: #666; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><span style='font-family: Inter; color: #D4AF37; font-size: 14px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
                     x=0.5, y=0.5, showarrow=False
                 )]
             )
