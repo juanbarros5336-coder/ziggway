@@ -1504,35 +1504,35 @@ def main() -> None:
             # --- ORDERS ---
             st.markdown("""
 <div style="background: transparent; border-left: 3px solid #D4AF37; padding: 10px 12px; border-radius: 6px; margin-bottom: 8px;">
-    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Orders</div>
+    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Pedidos</div>
     <div style="color: #777; font-size: 0.65rem; line-height: 1.4;">
         Colunas: <code style="background:transparent; color:#AAA;">order_id</code>, <code style="background:transparent; color:#AAA;">customer_id</code>, <code style="background:transparent; color:#AAA;">order_status</code>, <code style="background:transparent; color:#AAA;">order_purchase_timestamp</code>
     </div>
 </div>
 """, unsafe_allow_html=True)
-            f_ord = st.file_uploader("Upload Orders", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_orders", label_visibility="collapsed")
+            f_ord = st.file_uploader("Carregar Pedidos", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_orders", label_visibility="collapsed")
             
             # --- PAYMENTS ---
             st.markdown("""
 <div style="background: transparent; border-left: 3px solid #D4AF37; padding: 10px 12px; border-radius: 6px; margin-bottom: 8px;">
-    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Payments</div>
+    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Pagamentos</div>
     <div style="color: #777; font-size: 0.65rem; line-height: 1.4;">
         Colunas: <code style="background:transparent; color:#AAA;">order_id</code>, <code style="background:transparent; color:#AAA;">payment_value</code>
     </div>
 </div>
 """, unsafe_allow_html=True)
-            f_pay = st.file_uploader("Upload Payments", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_payments", label_visibility="collapsed")
+            f_pay = st.file_uploader("Carregar Pagamentos", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_payments", label_visibility="collapsed")
             
             # --- REVIEWS ---
             st.markdown("""
 <div style="background: transparent; border-left: 3px solid #D4AF37; padding: 10px 12px; border-radius: 6px; margin-bottom: 8px;">
-    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Reviews</div>
+    <div style="color: #F0F0F0; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Avaliações</div>
     <div style="color: #777; font-size: 0.65rem; line-height: 1.4;">
         Colunas: <code style="background:transparent; color:#AAA;">order_id</code>, <code style="background:transparent; color:#AAA;">review_score</code>, <code style="background:transparent; color:#AAA;">review_comment_message</code>
     </div>
 </div>
 """, unsafe_allow_html=True)
-            f_rev = st.file_uploader("Upload Reviews", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_reviews", label_visibility="collapsed")
+            f_rev = st.file_uploader("Carregar Avaliações", type=['csv', 'xlsx', 'parquet', 'json'], key="uploader_reviews", label_visibility="collapsed")
             
             if f_ord: uploaded_files["orders"] = f_ord
             if f_pay: uploaded_files["payments"] = f_pay
