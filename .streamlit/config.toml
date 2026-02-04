@@ -1,0 +1,9 @@
+[server]
+maxUploadSize = 10000
+enableWebsocketCompression = true
+headless = true
+
+[browser]
+serverAddress = "localhost"
+gatherUsageStats = false
+pageTitle = "ZIGGWAY"

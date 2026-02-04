@@ -1,0 +1,22 @@
+# Core
+pandas==2.3.3
+numpy==2.4.2
+streamlit==1.53.1
+
+# AI / LLM
+groq==1.0.0
+google-generativeai
+openai
+
+# Visualization
+plotly==6.5.2
+matplotlib
+
+# Data Processing
+scikit-learn
+openpyxl
+pyarrow
+lxml
+
+# Config
+python-dotenv==1.2.1

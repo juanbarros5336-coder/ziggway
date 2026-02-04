@@ -1,0 +1,32 @@
+# Security: Never commit secrets
+.env
+.env.local
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (large/private)
+data/*.csv
+data/*.zip
+*.parquet
+
+# Agent configs (local only)
+.agent/
+
+# Backup files
+*.bak
+*_backup.py
