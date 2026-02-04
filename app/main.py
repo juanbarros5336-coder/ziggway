@@ -1159,6 +1159,15 @@ def render_dashboard(ctx: PageContext) -> None:
                 )]
             )
             st.plotly_chart(fig, use_container_width=True)
+            
+            # Legend explaining the gold color
+            st.markdown("""
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: -15px;">
+                <div style="width: 12px; height: 12px; background: #D4AF37; border-radius: 2px;"></div>
+                <span style="font-family: 'Inter'; font-size: 12px; color: #888;">Pedidos Entregues</span>
+            </div>
+            """, unsafe_allow_html=True)
+
 
         with col_specs:
             st.markdown("<div style='height: 30px'></div>", unsafe_allow_html=True)
