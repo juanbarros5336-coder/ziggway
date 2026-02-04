@@ -1158,19 +1158,11 @@ def render_dashboard(ctx: PageContext) -> None:
                 margin=dict(l=0,r=0,t=0,b=0), 
                 paper_bgcolor='rgba(0,0,0,0)',
                 annotations=[dict(
-                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 36px; font-weight: 700;'>{total:,}</span><br><span style='font-family: Inter; color: #666; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><span style='font-family: Inter; color: #D4AF37; font-size: 14px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
+                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 38px; font-weight: 700;'>{total:,}</span><br><br><span style='font-family: Inter; color: #666; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><br><span style='font-family: Inter; color: #D4AF37; font-size: 15px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
                     x=0.5, y=0.5, showarrow=False
                 )]
             )
             st.plotly_chart(fig, use_container_width=True)
-            
-            # Legend explaining the gold color
-            st.markdown("""
-            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: -15px;">
-                <div style="width: 12px; height: 12px; background: #D4AF37; border-radius: 2px;"></div>
-                <span style="font-family: 'Inter'; font-size: 12px; color: #888;">Pedidos Entregues</span>
-            </div>
-            """, unsafe_allow_html=True)
 
 
         with col_specs:
