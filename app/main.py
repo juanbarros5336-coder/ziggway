@@ -58,6 +58,13 @@ CSS_BUFFER = """
         --surface-black: rgba(10,10,10,0.7);
     }
 
+    /* HIDE STREAMLIT CLOUD TOOLBAR */
+    .stDeployButton, 
+    [data-testid="stToolbar"],
+    header[data-testid="stHeader"] {
+        display: none !important;
+    }
+
     /* GLOBAL RESET */
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
