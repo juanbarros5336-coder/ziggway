@@ -1015,6 +1015,13 @@ def data_ingestion_pipeline(uploaded_files: Dict[str, Any]) -> ProcessingResult:
     # Load Data (files mapped explicitly to expected keys)
     raw_data = ingestor.load_data(uploaded_files if uploaded_files else None)
     
+    # --- AUTO-MOCK FALLBACK FOR CLOUD DEMO ---
+    if not raw_data:
+        # If running on cloud/clean env with no upload, generate mock data automatically
+        generate_mock_data()
+        # Retry loading
+        raw_data = ingestor.load_data(None)
+
     if not raw_data:
         return ProcessingResult(None, None, None, 1) # Return Error Code
         
