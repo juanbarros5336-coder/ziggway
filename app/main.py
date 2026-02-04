@@ -12,9 +12,13 @@
  */
 """
 
+import os
 import sys
 import time
 import abc
+
+# Path fix for Streamlit Cloud (detect root)
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from typing import Dict, List, Optional, Tuple, NamedTuple, Any
 from dataclasses import dataclass
 
