@@ -1,5 +1,6 @@
 # Projeto de Análise de E-commerce com IA
-Link do projeto https://ziggway.streamlit.app/ \n
+Link do projeto https://ziggway.streamlit.app/ 
+
 Este projeto utiliza Análise de Dados e integração com APIs de Inteligência Artificial para processar dados de vendas e analisar comentários de clientes, ajudando a identificar problemas na operação de uma loja.
 
 ## Sobre o Projeto
