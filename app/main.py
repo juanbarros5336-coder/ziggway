@@ -40,7 +40,7 @@ CSS_BUFFER = """
     :root {
         --noir-bg: #050505;
         --carbon-grid: rgba(255,255,255,0.03);
-        --platinum: #E5E4E2;
+        --platinum: #FFFFFF;
         --champagne: #D4AF37;
         --glass-border: rgba(255,255,255,0.08);
         --surface-black: rgba(10,10,10,0.7);
@@ -58,6 +58,10 @@ CSS_BUFFER = """
         font-family: 'Inter', sans-serif;
         color: var(--platinum);
         font-weight: 300;
+    }
+    
+    h1, h2, h3, h4, h5, h6, [data-testid="stMarkdownContainer"] p {
+        color: #FFFFFF !important;
     }
 
     /* BACKGROUND: CARBON GRID */
@@ -1041,7 +1045,7 @@ def data_ingestion_pipeline(uploaded_files: Dict[str, Any]) -> ProcessingResult:
 def render_dashboard(ctx: PageContext) -> None:
     """Renders the Strategic Dashboard view."""
     st.title("Visão Estratégica")
-    st.markdown("<p style='color: #888; font-family: Inter; font-size: 1.1rem; margin-top: -10px;'>Monitoramento executivo de performance e saúde financeira.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #FFFFFF; font-family: Inter; font-size: 1.1rem; margin-top: -10px;'>Monitoramento executivo de performance e saúde financeira.</p>", unsafe_allow_html=True)
 
 
     
@@ -1219,7 +1223,7 @@ def render_command_center(ctx: PageContext) -> None:
     # 2. Intelligent Triage
     st.subheader("Triagem Inteligente")
 
-    st.markdown("Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.")
+    st.markdown("<p style='color: #FFFFFF;'>Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.</p>", unsafe_allow_html=True)
     
     # Logic Partition: Pre-calculate view based on filter state
     is_filtered = st.session_state.get('filt_cancel', False)
