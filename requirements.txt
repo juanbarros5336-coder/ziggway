@@ -20,3 +20,4 @@ lxml
 
 # Config
 python-dotenv==1.2.1
+# Updated

@@ -33,3 +33,4 @@ data/*.zip
 # Backup files
 *.bak
 *_backup.py
+# Updated
