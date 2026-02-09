@@ -40,7 +40,7 @@ CSS_BUFFER = """
     :root {
         --noir-bg: #050505;
         --carbon-grid: rgba(255,255,255,0.03);
-        --platinum: #FFFFFF;
+        --platinum: #E0E0E0;
         --champagne: #D4AF37;
         --glass-border: rgba(255,255,255,0.08);
         --surface-black: rgba(10,10,10,0.7);
@@ -60,7 +60,7 @@ CSS_BUFFER = """
         font-weight: 300;
     }
     
-    h1, h2, h3, h4, h5, h6, [data-testid="stMarkdownContainer"] p {
+    h1, h2, h3, h4, h5, h6 {
         color: #FFFFFF !important;
     }
 
@@ -1045,7 +1045,7 @@ def data_ingestion_pipeline(uploaded_files: Dict[str, Any]) -> ProcessingResult:
 def render_dashboard(ctx: PageContext) -> None:
     """Renders the Strategic Dashboard view."""
     st.title("Visão Estratégica")
-    st.markdown("<p style='color: #FFFFFF; font-family: Inter; font-size: 1.1rem; margin-top: -10px;'>Monitoramento executivo de performance e saúde financeira.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #E0E0E0; font-family: Inter; font-size: 1.1rem; margin-top: -10px;'>Monitoramento executivo de performance e saúde financeira.</p>", unsafe_allow_html=True)
 
 
     
@@ -1086,9 +1086,9 @@ def render_dashboard(ctx: PageContext) -> None:
             margin=dict(l=0, r=0, t=20, b=20),
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(family="Inter", size=11, color="#FFFFFF"),
-            xaxis=dict(showgrid=False, title=None, showticklabels=True, tickfont=dict(color="#FFFFFF")),
-            yaxis=dict(showgrid=True, gridcolor="#222", title=None, tickfont=dict(color="#FFFFFF"), tickprefix="R$ ")
+            font=dict(family="Inter", size=11, color="#E0E0E0"),
+            xaxis=dict(showgrid=False, title=None, showticklabels=True, tickfont=dict(color="#E0E0E0")),
+            yaxis=dict(showgrid=True, gridcolor="#222", title=None, tickfont=dict(color="#E0E0E0"), tickprefix="R$ ")
         )
         fig.update_traces(line_color='#D4AF37', line_width=2, fillcolor='rgba(212, 175, 55, 0.1)')
         st.plotly_chart(fig, use_container_width=True)
@@ -1149,7 +1149,7 @@ def render_dashboard(ctx: PageContext) -> None:
                 margin=dict(l=0,r=0,t=0,b=0), 
                 paper_bgcolor='rgba(0,0,0,0)',
                 annotations=[dict(
-                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 38px; font-weight: 700;'>{total:,}</span><br><br><span style='font-family: Inter; color: #FFFFFF; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><br><span style='font-family: Inter; color: #D4AF37; font-size: 15px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
+                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 38px; font-weight: 700;'>{total:,}</span><br><br><span style='font-family: Inter; color: #E0E0E0; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><br><span style='font-family: Inter; color: #D4AF37; font-size: 15px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
                     x=0.5, y=0.5, showarrow=False
                 )]
             )
@@ -1165,7 +1165,7 @@ def render_dashboard(ctx: PageContext) -> None:
             detail_list = detail_list[detail_list['percent'] > 0.001] 
             
             if detail_list.empty:
-                st.markdown("<div style='color: #FFFFFF; font-family: Inter; font-size: 13px;'>Nenhuma anomalia de distribuição detectada.</div>", unsafe_allow_html=True)
+                st.markdown("<div style='color: #E0E0E0; font-family: Inter; font-size: 13px;'>Nenhuma anomalia de distribuição detectada.</div>", unsafe_allow_html=True)
             else:
                 items_html = ""
                 for i, (_, row) in enumerate(detail_list.iterrows()):
@@ -1183,7 +1183,7 @@ def render_dashboard(ctx: PageContext) -> None:
         <div style="width: 3px; height: 32px; background: {val_color}; border-radius: 2px;"></div>
         <div style="display: flex; flex-direction: column; gap: 2px;">
             <span style="font-family: 'Inter'; font-size: 14px; color: #EEE; font-weight: 500;">{row['status_pt']}</span>
-            <span style="font-family: 'Inter'; font-size: 11px; color: #FFFFFF; letter-spacing: 0.5px;">{row['count']:,} ordens</span>
+            <span style="font-family: 'Inter'; font-size: 11px; color: #E0E0E0; letter-spacing: 0.5px;">{row['count']:,} ordens</span>
         </div>
     </div>
     <div style="text-align: right;">
@@ -1223,7 +1223,7 @@ def render_command_center(ctx: PageContext) -> None:
     # 2. Intelligent Triage
     st.subheader("Triagem Inteligente")
 
-    st.markdown("<p style='color: #FFFFFF;'>Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #E0E0E0;'>Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.</p>", unsafe_allow_html=True)
     
     # Logic Partition: Pre-calculate view based on filter state
     is_filtered = st.session_state.get('filt_cancel', False)
