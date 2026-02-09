@@ -1040,7 +1040,7 @@ def data_ingestion_pipeline(uploaded_files: Dict[str, Any]) -> ProcessingResult:
 
 def render_dashboard(ctx: PageContext) -> None:
     """Renders the Strategic Dashboard view."""
-    st.markdown("<h1 style='color: #FFFFFF; font-family: Playfair Display; font-weight: 700; margin-bottom: 0px;'>Visão Estratégica</h1>", unsafe_allow_html=True)
+    st.title("Visão Estratégica")
     st.markdown("<p style='color: #888; font-family: Inter; font-size: 1.1rem; margin-top: -10px;'>Monitoramento executivo de performance e saúde financeira.</p>", unsafe_allow_html=True)
 
 
@@ -1070,7 +1070,7 @@ def render_dashboard(ctx: PageContext) -> None:
     st.divider()
     
     st.markdown("<div style='height: 20px'></div>", unsafe_allow_html=True)
-    st.markdown("<h2 style='color: #FFFFFF; font-size: 36px; font-family: Playfair Display; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;'>Desempenho Financeiro</h2>", unsafe_allow_html=True)
+    st.header("Desempenho Financeiro")
     if 'order_purchase_timestamp' in ctx.df.columns:
         # 1. Revenue Chart Logic
         # Group by week to smooth out noise if dataset is large, otherwise day
@@ -1092,7 +1092,7 @@ def render_dashboard(ctx: PageContext) -> None:
     st.divider()
 
     st.markdown("<div style='height: 30px'></div>", unsafe_allow_html=True)
-    st.markdown("<h2 style='color: #FFFFFF; font-size: 36px; font-family: Playfair Display; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;'>Composição e Distribuição</h2>", unsafe_allow_html=True)
+    st.header("Composição e Distribuição")
     if 'order_status' in ctx.df.columns:
         # 1. Prepare Data
         counts = ctx.df['order_status'].value_counts().reset_index()
@@ -1191,7 +1191,7 @@ def render_dashboard(ctx: PageContext) -> None:
 
 def render_command_center(ctx: PageContext) -> None:
     """Renders the CX Command Center."""
-    st.markdown("<h1 style='color: #FFFFFF; font-family: Playfair Display; font-weight: 700; margin-bottom: 20px;'>Experiência do Cliente</h1>", unsafe_allow_html=True)
+    st.title("Experiência do Cliente")
     
     # 1. Metrics Header
     nps_proxy = "N/A"
@@ -1217,40 +1217,9 @@ def render_command_center(ctx: PageContext) -> None:
     st.divider()
     
     # 2. Intelligent Triage
-    st.markdown("""
-    <div style="margin: 40px 0 20px 0;">
-        <h2 style="
-            color: #FFFFFF; 
-            font-family: 'Playfair Display', serif; 
-            font-size: 2.4rem; 
-            font-weight: 700;
-            margin: 0 0 12px 0;
+    st.subheader("Triagem Inteligente")
 
-            letter-spacing: -0.5px;
-        ">Triagem Inteligente</h2>
-        <div style="
-            width: 60px; 
-            height: 3px; 
-            background: linear-gradient(90deg, #D4AF37, rgba(212, 175, 55, 0.3));
-            border-radius: 2px;
-        "></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="margin-bottom: 30px; max-width: 800px;">
-        <p style="
-            color: rgba(255,255,255,0.6); 
-            font-family: 'Inter', sans-serif; 
-            font-size: 1.05rem; 
-            line-height: 1.6;
-            margin: 0;
-            font-weight: 300;
-        ">
-            Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("Transforme feedback em estratégia. O sistema analisa automaticamente o sentimento e a urgência de cada avaliação, organizando as prioridades para que sua equipe atue com precisão e agilidade.")
     
     # Logic Partition: Pre-calculate view based on filter state
     is_filtered = st.session_state.get('filt_cancel', False)
@@ -1351,7 +1320,7 @@ def _render_last_analysis_table() -> None:
     """Helper: Displays the results table."""
     if 'last_analysis' not in st.session_state: return
     
-    st.markdown("<h4 style='color: #FFFFFF; font-family: Playfair Display;'>Resultados da Análise</h4>", unsafe_allow_html=True)
+    st.subheader("Resultados da Análise")
     df = st.session_state['last_analysis']
     
     st.dataframe(
@@ -1368,24 +1337,7 @@ def _render_last_analysis_table() -> None:
 
 def _render_explorer(full_df: pd.DataFrame) -> None:
     """Helper: Renders the Case Explorer section."""
-    st.markdown("""
-    <div style="margin: 40px 0 20px 0;">
-        <h2 style="
-            color: #FFFFFF; 
-            font-family: 'Playfair Display', serif; 
-            font-size: 2.4rem; 
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            letter-spacing: -0.5px;
-        ">Explorador de Dados</h2>
-        <div style="
-            width: 60px; 
-            height: 3px; 
-            background: linear-gradient(90deg, #D4AF37, rgba(212, 175, 55, 0.3));
-            border-radius: 2px;
-        "></div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Explorador de Dados")
     
     with st.expander("Filtros Avançados", expanded=False):
         f1, f2, f3 = st.columns(3)
