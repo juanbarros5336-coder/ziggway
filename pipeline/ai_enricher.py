@@ -43,13 +43,13 @@ class ReviewAnalyzer:
 
         result = None
 
-        # --- AI FIRST ARCHITECTURE ---
+        # --- AI ARCHITECTURE ---
         if not self.mock_mode:
             try: # Outer try for safety
                 # Contexto da Nota (Ground Truth)
                 score_context = f"NOTA DADA: {score}/5" if score else "NOTA: Não informada"
                 
-                # Prompt Engineering: Conciso e Direto (Otimizado para Velocidade)
+                # Prompt Engineering
                 prompt = f"""
                 ANALISE O TEXTO ABAIXO (PT-BR) E RETORNE UM JSON.
                 
@@ -82,7 +82,7 @@ class ReviewAnalyzer:
                             "role": "system", 
                             "content": prompt
                         },
-                        # --- FEW-SHOT OTIMIZADO ---
+                        # --- FEW-SHOT EXAMPLES ---
                         {
                             "role": "user",
                             "content": 'TEXTO: "Gostei, mas veio quebrado." NOTA: 1/5'
@@ -148,25 +148,25 @@ class ReviewAnalyzer:
             if "reasoning" not in result:
                 result["reasoning"] = ""
 
-            # 1. MORTE AO NEUTRO (Neutral Killing)
+            # 1. Neutral Sentiment Logic
             if result.get("sentiment") == "Neutro":
                 if score_int <= 3:
                      result["sentiment"] = "Negativo"
-                     result["category"] = "Qualidade" # Default seguro
-                     result["reasoning"] += " [AUTO-CORRECT: Neutro em nota baixa vira Negativo]"
+                     result["category"] = "Qualidade"
+                     result["reasoning"] += " [AUTO-CORRECT: Integrated Score Adjustment]"
                 elif score_int >= 4:
                      result["sentiment"] = "Positivo"
-                     result["reasoning"] += " [AUTO-CORRECT: Neutro em nota alta vira Positivo]"
+                     result["reasoning"] += " [AUTO-CORRECT: Integrated Score Adjustment]"
 
-            # 2. DITADURA DA NOTA (Polaridade Extrema)
+            # 2. Score Polarity Enforcement
             if score_int <= 2 and result.get("sentiment") != "Negativo":
                 result["sentiment"] = "Negativo"
-                result["reasoning"] += " [FORCE: Nota Crítica]"
+                result["reasoning"] += " [FORCE: Critical Score]"
             elif score_int == 5 and result.get("sentiment") != "Positivo":
                 result["sentiment"] = "Positivo"
-                result["reasoning"] += " [FORCE: Nota Máxima]"
+                result["reasoning"] += " [FORCE: Max Score]"
 
-            # 3. MATRIZ DE URGÊNCIA RÍGIDA
+            # 3. Urgency Matrix Logic
             if result.get("sentiment") == "Negativo":
                 if result.get("urgency") == "Baixa":
                     result["urgency"] = "Média" # Upgrade automático
@@ -183,7 +183,7 @@ class ReviewAnalyzer:
                     else:
                         result["suggested_action"] = "Resolução Imediata / Estorno"
 
-            # 4. OVERRIDE LÉXICO POSITIVO
+            # 4. Positive Lexicon Override
             triggers_positive = ["parabéns", "excelente", "perfeito", "amei", "recomendo", "ótimo", "maravilhoso"]
             if any(t in text_raw.lower() for t in triggers_positive):
                     if score_int >= 4: 
