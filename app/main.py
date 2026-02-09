@@ -49,8 +49,13 @@ CSS_BUFFER = """
     /* HIDE STREAMLIT CLOUD TOOLBAR */
     .stDeployButton, 
     [data-testid="stToolbar"],
-    header[data-testid="stHeader"] {
+    header[data-testid="stHeader"],
+    footer,
+    #MainMenu,
+    [data-testid="stStatusWidget"],
+    [data-testid="stDecoration"] {
         display: none !important;
+        visibility: hidden !important;
     }
 
     /* GLOBAL RESET */
