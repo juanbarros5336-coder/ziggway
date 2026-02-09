@@ -1,15 +1,6 @@
 """
-/**
- * @file main.py
- * @brief Entry point for the ZIGGWAY Intelligence Hub.
- * @author System Architect (Legacy Refactor)
- * @version 2.1.0-STABLE
- *
- * HISTORY:
- * - Refactored from script-mode to structured application.
- * - Enforced strict typing and explicit state management.
- * - Memory footprint optimization in data loading routines.
- */
+@file main.py
+@brief Entry point for the ZIGGWAY Intelligence Hub.
 """
 
 import os
@@ -26,9 +17,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Check python version for compatibility
+# Check python version
 if sys.version_info < (3, 8):
-    raise RuntimeError("System requires Python 3.8+ for efficient memory handling.")
+    raise RuntimeError("System requires Python 3.8+.")
 
 # Internal Modules
 from pipeline.data_processor import DataIngestor, DataCleaner, MetricsEngine, generate_mock_data
@@ -39,14 +30,11 @@ PAGE_TITLE = "ZIGGWAY"
 PAGE_ICON = None
 LAYOUT_MODE = "wide"
 
-# CSS Macros for ease of memory mapping (and editing)
-COLOR_NEON_GREEN = "#00E676"
-COLOR_DEEP_BLACK = "#050505"
-COLOR_SIDEBAR_BG = "#0A0A0A"
+COLOR_SIDEBAR_BG = "#0A0A0A"         
 
 CSS_BUFFER = """
 <style>
-    /* 💎 KERNEL V4: NOIR ELEGANCE 💎 */
+    /* Main Styles */
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
     
     :root {
@@ -81,7 +69,7 @@ CSS_BUFFER = """
         background-size: 40px 40px;
     }
 
-    /* --- SIDEBAR: EXECUTIVE SUITE --- */
+    /* --- SIDEBAR --- */
     [data-testid="stSidebar"] {
         background-color: #080808 !important;
         border-right: 1px solid #1A1A1A;
@@ -130,7 +118,7 @@ CSS_BUFFER = """
     
     [data-testid="stSidebar"] [role="radiogroup"] label::before { display: none; }
 
-    /* --- METRICS: GLASS & PLATINUM (ZEN DISTRIBUTION) --- */
+    /* --- METRICS --- */
     [data-testid="stMetric"] {
         background: var(--surface-black);
         backdrop-filter: blur(20px);
@@ -147,7 +135,7 @@ CSS_BUFFER = """
         overflow: hidden !important;
     }
 
-    /* THE GENIAL TOUCH: LIVE PULSE */
+    /* Active Indicator */
     [data-testid="stMetric"]::before {
         content: '';
         position: absolute;
@@ -161,9 +149,9 @@ CSS_BUFFER = """
         animation: activePulse 2s infinite ease-in-out;
     }
 
-    /* THE EXECUTIVE FLOOR: SUBTLE DECOR */
+    /* Metric Decorator */
     [data-testid="stMetric"]::after {
-        content: 'CORE-INTEL // R25';
+        content: 'ZIGGWAY';
         position: absolute;
         bottom: 20px;
         right: 24px;
@@ -228,7 +216,7 @@ CSS_BUFFER = """
         font-weight: 500 !important;
     }
     
-    /* --- EXPANDER: SUPREME GLASS PANEL --- */
+    /* --- EXPANDER --- */
     [data-testid="stExpander"] {
         background: linear-gradient(165deg, rgba(18, 18, 18, 0.6), rgba(8, 8, 8, 0.8)) !important;
         border: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -308,7 +296,7 @@ CSS_BUFFER = """
         border-color: #FFF;
     }
 
-    /* --- QUANTUM CONTROL PAD (SEGMENTED CONTROL REINVENTED) --- */
+    /* --- SEGMENTED CONTROL --- */
     /* Nuke default styles */
     [data-testid="stSegmentedControl"] {
         background: transparent !important;
@@ -322,7 +310,7 @@ CSS_BUFFER = """
         border: none !important;
     }
 
-    /* The Unselected Chip (Glass Shard) */
+    /* Unselected State */
     [data-testid="stSegmentedControl"] button {
         background: rgba(255,255,255,0.03) !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
@@ -346,7 +334,7 @@ CSS_BUFFER = """
         color: #FFF !important;
     }
 
-    /* The Active State (Liquid Gold Ingot) */
+    /* Active State */
     [data-testid="stSegmentedControl"] button[data-active="true"] {
         background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%) !important;
         border: 1px solid #FFD700 !important;
@@ -363,7 +351,7 @@ CSS_BUFFER = """
         outline: none !important;
     }
 
-    /* --- DIGITAL INPUT: NUCLEAR OPTION (ELIMINATE WHITE) --- */
+    /* --- NUMBER INPUT --- */
     
     /* 1. Target the Deepest Input Element (NO INTERNAL BORDER) */
     div[data-testid="stNumberInput"] input {
@@ -467,7 +455,7 @@ CSS_BUFFER = """
         transform: translateY(-1px);
     }
 
-    /* NEURAL CONTROL CONTAINER: SUPREME GLASSMORPHISM */
+    /* CONTAINER STYLE */
     .neural-container {
         background: linear-gradient(165deg, rgba(18, 18, 18, 0.85), rgba(8, 8, 8, 0.95));
         border: 1px solid rgba(255, 255, 255, 0.06);
@@ -503,7 +491,7 @@ CSS_BUFFER = """
     
     [data-testid="stFileUploader"] { margin-top: 20px; border: 1px dashed #333; padding: 20px; border-radius: 8px; }
     
-    /* --- ELEGANT DARK INPUTS & MULTISELECT (REINFORCED) --- */
+    /* --- INPUTS & MULTISELECT --- */
     /* Universal Select/Input Background Fix */
     [data-testid="stMultiSelect"] [data-baseweb="select"] > div,
     [data-testid="stMultiSelect"] [role="combobox"],
@@ -634,7 +622,7 @@ CSS_BUFFER = """
     /* DATAFRAME */
     [data-testid="stDataFrame"] { border: 1px solid #222; border-radius: 8px; overflow: hidden; }
     
-    /* 🎬 MOTION DESIGN: CINEMATIC ENTRANCE */
+    /* ANIMATIONS */
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -649,7 +637,7 @@ CSS_BUFFER = """
     h1, h2, h3, h4 {
         animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    /* --- DOCUMENTATION CARDS (ULTRA-REFINED) --- */
+    /* --- DOCUMENTATION CARDS --- */
     .doc-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(255, 255, 255, 0.05);
@@ -899,14 +887,14 @@ CSS_BUFFER = """
         color: rgba(255, 255, 255, 0.6) !important;
     }
 
-    /* --- SUPREME NEURAL SWITCH (CHECKBOX) --- */
+    /* --- CHECKBOX --- */
     [data-testid="stCheckbox"] {
         background: rgba(10, 10, 10, 0.4);
         border: 1px solid rgba(50, 50, 50, 1);
         border-left: 2px solid rgba(50, 50, 50, 1);
         border-radius: 8px;
-        padding: 0 15px !important; /* Thinner padding */
-        height: 42px !important;    /* Exact match to MAX button */
+        padding: 0 15px !important;
+        height: 42px !important;
         display: flex !important;
         align-items: center !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1057,7 +1045,7 @@ def render_dashboard(ctx: PageContext) -> None:
 
 
     
-    # Calculate KPIs (Pointer arithmetic metaphor: direct access)
+    # Calculate KPIs
     rev_total = ctx.df['payment_value'].sum() if 'payment_value' in ctx.df else 0.0
     avg_tkt = ctx.df['payment_value'].mean() if 'payment_value' in ctx.df else 0.0
     
@@ -1082,7 +1070,7 @@ def render_dashboard(ctx: PageContext) -> None:
     st.divider()
     
     st.markdown("<div style='height: 20px'></div>", unsafe_allow_html=True)
-    st.markdown("<h2 style='color: #FFFFFF; font-size: 36px; font-family: Playfair Display; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;'>Performance Financeira</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: #FFFFFF; font-size: 36px; font-family: Playfair Display; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;'>Desempenho Financeiro</h2>", unsafe_allow_html=True)
     if 'order_purchase_timestamp' in ctx.df.columns:
         # 1. Revenue Chart Logic
         # Group by week to smooth out noise if dataset is large, otherwise day
@@ -1106,7 +1094,7 @@ def render_dashboard(ctx: PageContext) -> None:
     st.markdown("<div style='height: 30px'></div>", unsafe_allow_html=True)
     st.markdown("<h2 style='color: #FFFFFF; font-size: 36px; font-family: Playfair Display; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;'>Composição e Distribuição</h2>", unsafe_allow_html=True)
     if 'order_status' in ctx.df.columns:
-        # 1. Prepare Supreme Data (No Grouping - The user wants 'Divide the Others')
+        # 1. Prepare Data
         counts = ctx.df['order_status'].value_counts().reset_index()
         counts.columns = ['status', 'count']
         
@@ -1127,8 +1115,7 @@ def render_dashboard(ctx: PageContext) -> None:
         # 2. Layout (Executive Split)
         col_chart, col_specs = st.columns([1.2, 1])
         
-        # SUPREME PALETTE: High Variance Architectural Colors
-        # Gold, Platinum, Burnt Orange, Forest Green, Deep Azure, Wine Red, Teal, Amber
+        # Color Palette
         colors = ['#D4AF37', '#E5E4E2', '#E67E22', '#27AE60', '#2980B9', '#C0392B', '#16A085', '#F1C40F']
         
         with col_chart:
@@ -1169,7 +1156,7 @@ def render_dashboard(ctx: PageContext) -> None:
             st.markdown("<div style='height: 30px'></div>", unsafe_allow_html=True)
             st.markdown(f"<h4 style='font-family: Playfair Display; color: #FFF; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; opacity: 0.8;'>Distribuição Secundária</h4>", unsafe_allow_html=True)
             
-            # SUPREME LOGIC: Skip Entregue (index 0) and filter negligible data
+            # Skip delivered (index 0) and filter negligible data
             detail_list = counts.iloc[1:].copy()
             detail_list = detail_list[detail_list['percent'] > 0.001] 
             
@@ -1203,7 +1190,7 @@ def render_dashboard(ctx: PageContext) -> None:
                 st.markdown(f"<div style='display: flex; flex-direction: column;'>{items_html}</div>", unsafe_allow_html=True)
 
 def render_command_center(ctx: PageContext) -> None:
-    """Renders the CX Command Center with Neural Processing Controls."""
+    """Renders the CX Command Center."""
     st.markdown("<h1 style='color: #FFFFFF; font-family: Playfair Display; font-weight: 700; margin-bottom: 20px;'>Experiência do Cliente</h1>", unsafe_allow_html=True)
     
     # 1. Metrics Header
@@ -1238,6 +1225,7 @@ def render_command_center(ctx: PageContext) -> None:
             font-size: 2.4rem; 
             font-weight: 700;
             margin: 0 0 12px 0;
+
             letter-spacing: -0.5px;
         ">Triagem Inteligente</h2>
         <div style="
@@ -1324,7 +1312,7 @@ def render_command_center(ctx: PageContext) -> None:
 
 def _perform_neural_analysis(df: pd.DataFrame, qty: int, analyzer: ReviewAnalyzer) -> None:
     """Helper: Executes the analysis loop."""
-    with st.status("Executando Leitura Neural...", expanded=True) as status:
+    with st.status("Processando...", expanded=True) as status:
 
         
         target = df.head(qty)
@@ -1370,7 +1358,7 @@ def _render_last_analysis_table() -> None:
         df[['review_score', 'review_comment_message', 'Sentimento_IA', 'Categoria_IA', 'Urgencia_IA', 'Acao_Sugerida']],
         use_container_width=True,
         column_config={
-            "review_score": st.column_config.NumberColumn("Nota", format="%d ⭐"),
+            "review_score": st.column_config.NumberColumn("Nota", format="%d"),
             "review_comment_message": "Comentário",
             "Sentimento_IA": "Sentimento",
             "Urgencia_IA": "Urgência",
@@ -1422,7 +1410,7 @@ def _render_explorer(full_df: pd.DataFrame) -> None:
         hide_index=True,
         column_config={
             "order_id": "ID", "order_status": "Status", 
-            "review_score": st.column_config.NumberColumn("Nota", format="%d ⭐"),
+            "review_score": st.column_config.NumberColumn("Nota", format="%d"),
             "order_purchase_timestamp": st.column_config.DatetimeColumn("Data", format="D/M/Y H:mm")
         }
     )
@@ -1441,6 +1429,7 @@ def main() -> None:
     uploaded_files = {}
     with st.sidebar:
         st.title("ZIGGWAY")
+        st.markdown("[GitHub Profile](https://github.com/juan-barross/)")
         st.markdown("<div style='height: 15px'></div>", unsafe_allow_html=True)
         nav_mode = st.radio(
             "NAVEGAÇÃO", 
@@ -1567,8 +1556,7 @@ def main() -> None:
     result = data_ingestion_pipeline(uploaded_files)
     
     if result.status_code != 0:
-        st.error("⚠️ FATAL: Dados insuficientes. Carregue os arquivos ou gere o mock dataset.")
-        st.image("https://media.giphy.com/media/26hkhKd9CQzzXsps4/giphy.gif")
+        st.error("FATAL: Dados insuficientes. Carregue os arquivos ou gere o mock dataset.")
         return # STOP EXECUTION
 
     # 3. Create Context

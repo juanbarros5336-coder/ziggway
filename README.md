@@ -38,4 +38,9 @@ Para rodar o projeto localmente:
 4. Execute o comando do Streamlit:
    streamlit run app/main.py
 
+## Autor
+
+[Juan Barros](https://github.com/juan-barross/)
+
+
 

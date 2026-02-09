@@ -10,7 +10,7 @@ class DataIngestor:
 
 
     def _optimize_memory(self, df):
-        """Downcasts types to reduce memory usage for large files (Supreme Optimization)."""
+        """Downcasts types to reduce memory usage."""
         if df is None: return None
         
         # Downcast Numbers
@@ -26,8 +26,8 @@ class DataIngestor:
                 
         return df
 
-    def _read_supreme(self, file, filename):
-        """Smart loader that handles multiple formats and encoding logic."""
+    def _read_enhanced(self, file, filename):
+        """Enhanced loader that handles multiple formats and encoding logic."""
         if filename.endswith('.xlsx') or filename.endswith('.xls'):
             return pd.read_excel(file, engine='openpyxl')
             
@@ -58,7 +58,7 @@ class DataIngestor:
 
         # 1. Handle Uploaded Files (Priority)
         if uploaded_files:
-            print("Loading from uploaded files (Supreme Mode)...")
+            print("Loading from uploaded files...")
             try:
                 for key in required_keys:
                     if key in uploaded_files and uploaded_files[key] is not None:
@@ -66,8 +66,8 @@ class DataIngestor:
                         filename = file.name.lower()
                         print(f"Loading uploaded {key}: {filename}")
                         
-                        # Supreme Load
-                        df = self._read_supreme(file, filename)
+                        # Load Data
+                        df = self._read_enhanced(file, filename)
                         
                         # Normalize & Optimize
                         if df is not None:
