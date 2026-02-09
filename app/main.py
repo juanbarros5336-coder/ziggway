@@ -99,7 +99,7 @@ CSS_BUFFER = """
         margin-bottom: 8px;
         background: transparent;
         transition: all 0.3s ease;
-        color: #888;
+        color: #FFFFFF;
         font-family: 'Inter', sans-serif;
         font-size: 0.9rem;
         letter-spacing: 0.5px;
@@ -182,7 +182,7 @@ CSS_BUFFER = """
         font-family: 'Playfair Display', serif;
         font-style: italic;
         font-size: 0.85rem !important;
-        color: rgba(255,255,255,0.4) !important;
+        color: #FFFFFF !important;
         margin-bottom: 0 !important;
     }
     
@@ -1086,9 +1086,9 @@ def render_dashboard(ctx: PageContext) -> None:
             margin=dict(l=0, r=0, t=20, b=20),
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(family="Inter", size=11, color="#888"),
-            xaxis=dict(showgrid=False, title=None, showticklabels=True, tickfont=dict(color="#666")),
-            yaxis=dict(showgrid=True, gridcolor="#222", title=None, tickfont=dict(color="#666"), tickprefix="R$ ")
+            font=dict(family="Inter", size=11, color="#FFFFFF"),
+            xaxis=dict(showgrid=False, title=None, showticklabels=True, tickfont=dict(color="#FFFFFF")),
+            yaxis=dict(showgrid=True, gridcolor="#222", title=None, tickfont=dict(color="#FFFFFF"), tickprefix="R$ ")
         )
         fig.update_traces(line_color='#D4AF37', line_width=2, fillcolor='rgba(212, 175, 55, 0.1)')
         st.plotly_chart(fig, use_container_width=True)
@@ -1149,7 +1149,7 @@ def render_dashboard(ctx: PageContext) -> None:
                 margin=dict(l=0,r=0,t=0,b=0), 
                 paper_bgcolor='rgba(0,0,0,0)',
                 annotations=[dict(
-                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 38px; font-weight: 700;'>{total:,}</span><br><br><span style='font-family: Inter; color: #666; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><br><span style='font-family: Inter; color: #D4AF37; font-size: 15px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
+                    text=f"<span style='font-family: Playfair Display; color: #D4AF37; font-size: 38px; font-weight: 700;'>{total:,}</span><br><br><span style='font-family: Inter; color: #FFFFFF; font-size: 11px; letter-spacing: 3px; font-weight: 600;'>ORDENS TOTAIS</span><br><br><span style='font-family: Inter; color: #D4AF37; font-size: 15px; font-weight: 600;'>{del_pct:.1f}% Entregue</span>", 
                     x=0.5, y=0.5, showarrow=False
                 )]
             )
@@ -1165,7 +1165,7 @@ def render_dashboard(ctx: PageContext) -> None:
             detail_list = detail_list[detail_list['percent'] > 0.001] 
             
             if detail_list.empty:
-                st.markdown("<div style='color: #444; font-family: Inter; font-size: 13px;'>Nenhuma anomalia de distribuição detectada.</div>", unsafe_allow_html=True)
+                st.markdown("<div style='color: #FFFFFF; font-family: Inter; font-size: 13px;'>Nenhuma anomalia de distribuição detectada.</div>", unsafe_allow_html=True)
             else:
                 items_html = ""
                 for i, (_, row) in enumerate(detail_list.iterrows()):
@@ -1183,7 +1183,7 @@ def render_dashboard(ctx: PageContext) -> None:
         <div style="width: 3px; height: 32px; background: {val_color}; border-radius: 2px;"></div>
         <div style="display: flex; flex-direction: column; gap: 2px;">
             <span style="font-family: 'Inter'; font-size: 14px; color: #EEE; font-weight: 500;">{row['status_pt']}</span>
-            <span style="font-family: 'Inter'; font-size: 11px; color: #666; letter-spacing: 0.5px;">{row['count']:,} ordens</span>
+            <span style="font-family: 'Inter'; font-size: 11px; color: #FFFFFF; letter-spacing: 0.5px;">{row['count']:,} ordens</span>
         </div>
     </div>
     <div style="text-align: right;">
