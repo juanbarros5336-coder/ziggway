@@ -1,4 +1,5 @@
 # Projeto de Análise de E-commerce com IA
+
 Link do projeto https://ziggway.streamlit.app/ 
 
 Este projeto utiliza Análise de Dados e integração com APIs de Inteligência Artificial para processar dados de vendas e analisar comentários de clientes, ajudando a identificar problemas na operação de uma loja.
@@ -14,16 +15,16 @@ A aplicação processa dados do dataset público da Olist e oferece:
 ## Tecnologias Utilizadas
 
 - Python 3.10+
-- Streamlit (Interface e Dashboard)
-- Pandas (Tratamento de dados)
-- Groq API / DeepSeek (Processamento de linguagem natural)
-- Plotly (Visualização de dados)
+- Streamlit 
+- Pandas 
+- Groq API / DeepSeek 
+- Plotly 
 
 ## Estrutura do Projeto
 
 O código está organizado em módulos para facilitar a manutenção:
- Visão Estratégicc*: Painel com os indicadores principais da loja (KPIS).
-CX Command Center*: Área dedicada à análise qualitativa. Inclui uma tabela interativa que permite enviar lotes de comentários para análise da IA e receber sugestões de ação.
+Visão Estratégica: Painel com os indicadores principais da loja.
+CX Command Center: Área dedicada à análise qualitativa. Inclui uma tabela interativa que permite enviar lotes de comentários para análise da IA e receber sugestões de ação.
 
 Como Executar
 
@@ -47,4 +48,3 @@ Para rodar o projeto localmente:
 
 
 
-<!-- Updated -->
